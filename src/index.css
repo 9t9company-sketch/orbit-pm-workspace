@@ -1,0 +1,351 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* OrbitPM Design System - Space/Orbital Theme */
+
+@layer base {
+  :root {
+    /* Light mode (secondary) */
+    --background: 220 20% 97%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 245 58% 51%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 187 92% 46%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 245 58% 51%;
+
+    --radius: 0.75rem;
+
+    /* OrbitPM Custom Tokens */
+    --orbit-gradient-start: 245 58% 51%;
+    --orbit-gradient-end: 200 90% 50%;
+    --orbit-glow: 245 80% 70%;
+    --orbit-surface: 220 20% 98%;
+    --orbit-surface-hover: 220 14% 95%;
+    --orbit-success: 142 71% 45%;
+    --orbit-warning: 38 92% 50%;
+    --orbit-info: 200 98% 48%;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 245 58% 51%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 245 58% 51%;
+  }
+
+  .dark {
+    /* Dark mode (primary) - Deep Space Theme */
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 8%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 245 58% 61%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 222 30% 14%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 222 30% 14%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 187 92% 50%;
+    --accent-foreground: 222 47% 6%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 222 30% 18%;
+    --input: 222 30% 18%;
+    --ring: 245 58% 61%;
+
+    /* OrbitPM Custom Tokens - Dark */
+    --orbit-gradient-start: 245 70% 60%;
+    --orbit-gradient-end: 187 92% 50%;
+    --orbit-glow: 245 100% 75%;
+    --orbit-surface: 222 40% 10%;
+    --orbit-surface-hover: 222 35% 14%;
+    --orbit-success: 142 71% 45%;
+    --orbit-warning: 38 92% 50%;
+    --orbit-info: 200 98% 48%;
+
+    --sidebar-background: 222 47% 7%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 245 58% 61%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 30% 12%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 222 30% 15%;
+    --sidebar-ring: 245 58% 61%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Custom scrollbar for dark theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/30;
+  }
+}
+
+@layer components {
+  /* Orbital gradient backgrounds */
+  .orbit-gradient {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--orbit-gradient-start)) 0%,
+      hsl(var(--orbit-gradient-end)) 100%
+    );
+  }
+
+  .orbit-gradient-text {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--orbit-gradient-start)) 0%,
+      hsl(var(--orbit-gradient-end)) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .orbit-gradient-border {
+    position: relative;
+  }
+
+  .orbit-gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--orbit-gradient-start)) 0%,
+      hsl(var(--orbit-gradient-end)) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Glass morphism cards */
+  .orbit-glass {
+    @apply bg-card/80 backdrop-blur-xl border border-border/50;
+  }
+
+  .orbit-glass-strong {
+    @apply bg-card/95 backdrop-blur-2xl border border-border/80;
+  }
+
+  /* Glow effects */
+  .orbit-glow {
+    box-shadow: 
+      0 0 20px -5px hsl(var(--orbit-glow) / 0.3),
+      0 0 40px -10px hsl(var(--orbit-glow) / 0.2);
+  }
+
+  .orbit-glow-sm {
+    box-shadow: 0 0 10px -3px hsl(var(--orbit-glow) / 0.25);
+  }
+
+  /* Surface states */
+  .orbit-surface {
+    @apply bg-orbit-surface hover:bg-orbit-surface-hover transition-colors duration-200;
+  }
+
+  /* Status badges */
+  .orbit-status-success {
+    @apply bg-orbit-success/15 text-orbit-success border border-orbit-success/30;
+  }
+
+  .orbit-status-warning {
+    @apply bg-orbit-warning/15 text-orbit-warning border border-orbit-warning/30;
+  }
+
+  .orbit-status-info {
+    @apply bg-orbit-info/15 text-orbit-info border border-orbit-info/30;
+  }
+
+  /* Animated hover states */
+  .orbit-hover-lift {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .orbit-hover-lift:hover {
+    @apply -translate-y-1;
+    box-shadow: 
+      0 10px 30px -10px hsl(var(--orbit-glow) / 0.15),
+      0 20px 50px -20px hsl(var(--primary) / 0.1);
+  }
+
+  /* Focus ring */
+  .orbit-focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  /* Kanban column styling */
+  .orbit-kanban-column {
+    @apply bg-muted/30 rounded-xl p-3 min-w-[300px] max-w-[300px] flex flex-col;
+  }
+
+  /* Task card styling */
+  .orbit-task-card {
+    @apply bg-card rounded-lg p-4 border border-border/50 hover:border-primary/30 transition-all duration-200 cursor-pointer;
+  }
+
+  .orbit-task-card:hover {
+    @apply shadow-lg;
+    box-shadow: 0 4px 20px -5px hsl(var(--primary) / 0.15);
+  }
+}
+
+@layer utilities {
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out forwards;
+  }
+
+  .animate-slide-down {
+    animation: slideDown 0.2s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out forwards;
+  }
+
+  .animate-pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% {
+      box-shadow: 0 0 20px -5px hsl(var(--orbit-glow) / 0.3);
+    }
+    50% {
+      box-shadow: 0 0 30px -5px hsl(var(--orbit-glow) / 0.5);
+    }
+  }
+
+  /* Gradient text utility */
+  .text-gradient-primary {
+    @apply orbit-gradient-text;
+  }
+
+  /* Priority indicators */
+  .priority-critical {
+    @apply bg-destructive text-destructive-foreground;
+  }
+
+  .priority-high {
+    @apply bg-orange-500 text-white;
+  }
+
+  .priority-medium {
+    @apply bg-amber-500 text-white;
+  }
+
+  .priority-low {
+    @apply bg-emerald-500 text-white;
+  }
+}
