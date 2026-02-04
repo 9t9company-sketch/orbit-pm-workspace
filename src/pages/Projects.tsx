@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Plus, Grid3X3, List, Search, Filter, MoreHorizontal, Loader2 } from "lucide-react";
+import { Plus, Grid3X3, List, Search, Filter, MoreHorizontal, Loader2, Columns } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,9 +17,10 @@ import { cn } from "@/lib/utils";
 import { mockUsers, mockTeams, mockProjects } from "@/data/mockData";
 import { useProjects } from "@/hooks/useProjects";
 import { ProjectDialog } from "@/components/projects/ProjectDialog";
+import { ProjectKanbanBoard } from "@/components/projects/ProjectKanbanBoard";
 import { Project } from "@/data/types";
 
-type ViewMode = "grid" | "list";
+type ViewMode = "grid" | "list" | "board";
 
 export default function Projects() {
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
@@ -103,6 +104,15 @@ export default function Projects() {
             <List className="w-4 h-4" />
             <span className="hidden sm:inline">List</span>
           </Button>
+          <Button
+            variant={viewMode === "board" ? "secondary" : "ghost"}
+            size="sm"
+            onClick={() => setViewMode("board")}
+            className="gap-2"
+          >
+            <Columns className="w-4 h-4" />
+            <span className="hidden sm:inline">Board</span>
+          </Button>
         </div>
       </div>
 
@@ -112,8 +122,10 @@ export default function Projects() {
         </div>
       ) : (
         <>
-          {/* Projects Grid/List */}
-          {viewMode === "grid" ? (
+          {/* Projects Grid/List/Board */}
+          {viewMode === "board" ? (
+            <ProjectKanbanBoard projects={filteredProjects} onEditProject={handleEdit} />
+          ) : viewMode === "grid" ? (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {filteredProjects.map((project, index) => {
                 const owner = mockUsers.find((u) => u.id === project.ownerId);

@@ -64,9 +64,7 @@ interface TaskDialogProps {
 export function TaskDialog({ open, onOpenChange, task, projectId }: TaskDialogProps) {
     const { createTask, updateTask } = useTasks();
     const { projects } = useProjects();
-    const selectedProjectId = form.watch("projectId");
-    const { sprints } = useSprints(selectedProjectId);
-
+    
     const form = useForm<TaskFormValues>({
         resolver: zodResolver(taskSchema),
         defaultValues: {
@@ -81,6 +79,9 @@ export function TaskDialog({ open, onOpenChange, task, projectId }: TaskDialogPr
             subtasks: [],
         },
     });
+
+    const selectedProjectId = form.watch("projectId");
+    const { sprints } = useSprints(selectedProjectId);
 
     const { fields, append, remove } = useFieldArray({
         control: form.control,
