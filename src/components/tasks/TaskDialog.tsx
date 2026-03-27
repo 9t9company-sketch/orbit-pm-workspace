@@ -117,15 +117,23 @@ export function TaskDialog({ open, onOpenChange, task, projectId }: TaskDialogPr
     }, [task, form, open, projectId]);
 
     async function onSubmit(values: TaskFormValues) {
+        const subtasksWithIds = values.subtasks?.map((s, i) => ({
+            id: crypto.randomUUID(),
+            taskId: task?.id || "",
+            title: s.title || "",
+            completed: s.completed ?? false,
+            orderIndex: i,
+        })) || [];
         if (task) {
-            await updateTask.mutateAsync({ ...values, id: task.id });
+            await updateTask.mutateAsync({ ...values, subtasks: subtasksWithIds, id: task.id });
         } else {
             await createTask.mutateAsync({
                 ...values,
-                creatorId: "user-1", // Demo user
+                subtasks: subtasksWithIds,
+                creatorId: "user-1",
                 isRecurring: false,
                 visibility: "team",
-            });
+            } as any);
         }
         onOpenChange(false);
     }

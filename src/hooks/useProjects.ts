@@ -11,7 +11,7 @@ export function useProjects() {
     queryKey: ["projects"],
     queryFn: async () => {
       try {
-        const { data, error } = await supabase
+        const { data, error } = await (supabase as any)
           .from("projects")
           .select("*")
           .order("created_at", { ascending: false });
@@ -28,7 +28,7 @@ export function useProjects() {
   const createProject = useMutation({
     mutationFn: async (newProject: Omit<Project, "id" | "taskCount" | "completedTasks">) => {
       try {
-        const { data, error } = await supabase
+        const { data, error } = await (supabase as any)
           .from("projects")
           .insert([{
             ...newProject,
@@ -74,7 +74,7 @@ export function useProjects() {
   const updateProject = useMutation({
     mutationFn: async (project: Partial<Project> & { id: string }) => {
       try {
-        const { data, error } = await supabase
+        const { data, error } = await (supabase as any)
           .from("projects")
           .update(project)
           .eq("id", project.id)
@@ -111,7 +111,7 @@ export function useProjects() {
   const deleteProject = useMutation({
     mutationFn: async (id: string) => {
       try {
-        const { error } = await supabase
+        const { error } = await (supabase as any)
           .from("projects")
           .delete()
           .eq("id", id);

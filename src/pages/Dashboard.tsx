@@ -22,7 +22,7 @@ import {
 } from "@/data/mockData";
 
 export default function Dashboard() {
-  const activeTasks = mockTasks.filter((t) => t.status === "in-progress").length;
+  const activeTasks = mockTasks.filter((t) => t.status === "in_progress").length;
   const completedTasks = mockTasks.filter((t) => t.status === "done").length;
   const totalTasks = mockTasks.length;
   const activeSprint = mockSprints.find((s) => s.status === "active");
@@ -219,8 +219,8 @@ export default function Dashboard() {
                           className={cn(
                             "text-xs ml-2",
                             task.status === "done" && "orbit-status-success",
-                            task.status === "in-progress" && "orbit-status-info",
-                            task.status === "review" && "orbit-status-warning"
+                            task.status === "in_progress" && "orbit-status-info",
+                            task.status === "blocked" && "orbit-status-warning"
                           )}
                         >
                           {task.status}
@@ -257,7 +257,7 @@ export default function Dashboard() {
                     <div
                       className={cn(
                         "w-2 h-2 rounded-full",
-                        task.priority === "critical" && "bg-destructive",
+                        task.priority === "urgent" && "bg-destructive",
                         task.priority === "high" && "bg-orange-500",
                         task.priority === "medium" && "bg-amber-500",
                         task.priority === "low" && "bg-emerald-500"
@@ -272,7 +272,7 @@ export default function Dashboard() {
                       </p>
                     </div>
                     <Badge variant="secondary" className="text-xs">
-                      {task.storyPoints} pts
+                      {task.priority}
                     </Badge>
                   </div>
                 );
