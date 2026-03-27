@@ -9,11 +9,10 @@ const mockTimeEntries: (TimeEntry & { tasks: { title: string, projects: { name: 
         id: "te-1",
         taskId: "task-1",
         userId: "user-1",
-        startTime: "2024-02-01T09:00:00",
-        endTime: "2024-02-01T11:00:00",
-        duration: 7200,
+        duration: 120,
         description: "Initial research",
         date: "2024-02-01",
+        billable: true,
         tasks: {
             title: "Research competitors",
             projects: {
@@ -26,11 +25,10 @@ const mockTimeEntries: (TimeEntry & { tasks: { title: string, projects: { name: 
         id: "te-2",
         taskId: "task-2",
         userId: "user-1",
-        startTime: "2024-02-02T13:00:00",
-        endTime: "2024-02-02T15:30:00",
-        duration: 9000,
+        duration: 150,
         description: "Drafting wireframes",
         date: "2024-02-02",
+        billable: true,
         tasks: {
             title: "Create wireframes",
             projects: {

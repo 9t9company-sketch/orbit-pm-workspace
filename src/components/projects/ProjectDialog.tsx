@@ -92,11 +92,11 @@ export function ProjectDialog({ open, onOpenChange, project }: ProjectDialogProp
         } else {
             await createProject.mutateAsync({
                 ...values,
-                ownerId: "user-1", // For demo, assuming current user
+                ownerId: "user-1",
                 status: "active",
                 health: "on-track",
                 progress: 0,
-            });
+            } as any);
         }
         onOpenChange(false);
     }
